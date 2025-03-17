@@ -3,16 +3,7 @@ import { createContext, useContext, useState } from "react";
 export const StoreContext = createContext(null);
 
 export const StoreProvider = ({ children }) => {
-    const [contacts, setContacts] = useState([
-        {
-            id: 1,
-            name: "Mike Anamendolla",
-            address: "5842 Hillcrest Rd",
-            phone: "(870) 288-4149",
-            email: "mike.ana@example.com",
-            avatar: "https://randomuser.me/api/portraits/men/1.jpg"
-        }
-    ]);
+    const [contacts, setContacts] = useState([]);
 
     const addContact = (contact) => {
         setContacts((prevContacts) => [...prevContacts, contact]);
