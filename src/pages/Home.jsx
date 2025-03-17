@@ -1,26 +1,15 @@
-import { useEffect } from "react";
-import useGlobalReducer from "../hooks/useGlobalReducer";
+import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
-    const { store, getContacts, deleteContact } = useGlobalReducer();
+const Home = () => {
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        getContacts();
-    }, []);
-
-    return (
-        <div className="container mt-5">
-            <h1>Contact List</h1>
-            <ul className="list-group">
-                {store.contacts.map((contact) => (
-                    <li key={contact.id} className="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>{contact.name}</strong> - {contact.email} - {contact.phone}
-                        </div>
-                        <button className="btn btn-danger" onClick={() => deleteContact(contact.id)}>🗑 Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div className="container">
+      <h2>Welcome to Contact Manager</h2>
+      <button onClick={() => navigate("/contacts")}>View Contacts</button>
+      <button onClick={() => navigate("/add-contact")}>Add New Contact</button>
+    </div>
+  );
 };
+
+export default Home;

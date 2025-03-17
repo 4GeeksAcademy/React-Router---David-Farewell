@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
-import { StoreProvider } from './hooks/useGlobalReducer';
+import { StoreContext, StoreProvider } from "./store";
+import "./styles/index.css";
 
-const Main = () => {
-    return (
-        <React.StrictMode>
-            <StoreProvider>
-                <RouterProvider router={router} />
-            </StoreProvider>
-        </React.StrictMode>
-    );
-}
+const store = StoreProvider(); // Llamamos la función que devuelve el contexto
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Main />);
+const App = () => {
+  return (
+    <StoreContext.Provider value={store}>
+      <RouterProvider router={router} />
+    </StoreContext.Provider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
