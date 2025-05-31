@@ -1,37 +1,57 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useStore } from "../store.jsx";
+import { useState, useEffect } from "react";
+import { useStore } from "../store";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddContact = () => {
+    const { contacts, addContact, editContact } = useStore();
     const navigate = useNavigate();
-    const { addContact } = useStore();
+    const { id } = useParams();
+    const isEditing = !!id;
 
     const [formData, setFormData] = useState({
         name: "",
+        address: "",
         phone: "",
-        email: "",
-        address: ""
+        email: ""
     });
+
+    useEffect(() => {
+        if (isEditing) {
+            const contact = contacts.find(c => c.id === parseInt(id));
+            if (contact) {
+                setFormData({
+                    name: contact.name,
+                    address: contact.address,
+                    phone: contact.phone,
+                    email: contact.email
+                });
+            }
+        }
+    }, [id, contacts]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await addContact(formData);
+        if (isEditing) {
+            editContact(parseInt(id), formData);
+        } else {
+            addContact(formData);
+        }
         navigate("/contacts");
     };
 
     return (
-        <div className="container my-5">
-            <h2 className="mb-4">Add New Contact</h2>
+        <div className="container">
+            <h2>{isEditing ? "Edit Contact" : "Add New Contact"}</h2>
             <form onSubmit={handleSubmit}>
-                <input className="form-control mb-3" name="name" placeholder="Name" onChange={handleChange} required />
-                <input className="form-control mb-3" name="phone" placeholder="Phone" onChange={handleChange} required />
-                <input className="form-control mb-3" name="email" type="email" placeholder="Email" onChange={handleChange} required />
-                <input className="form-control mb-3" name="address" placeholder="Address" onChange={handleChange} required />
-                <button className="btn btn-primary">Save</button>
+                <input type="text" name="name" placeholder="Full Name" onChange={handleChange} value={formData.name} required />
+                <input type="text" name="address" placeholder="Address" onChange={handleChange} value={formData.address} required />
+                <input type="text" name="phone" placeholder="Phone" onChange={handleChange} value={formData.phone} required />
+                <input type="email" name="email" placeholder="Email" onChange={handleChange} value={formData.email} required />
+                <button type="submit">{isEditing ? "Update" : "Save"}</button>
             </form>
         </div>
     );

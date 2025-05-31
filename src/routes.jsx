@@ -6,5 +6,6 @@ import AddContact from "./pages/AddContact";
 export const router = createBrowserRouter([
     { path: "/", element: <Home /> },
     { path: "/contacts", element: <Contacts /> },
-    { path: "/add-contact", element: <AddContact /> }
+    { path: "/add-contact", element: <AddContact /> },
+    { path: "/edit-contact/:id", element: <AddContact /> }
 ]);

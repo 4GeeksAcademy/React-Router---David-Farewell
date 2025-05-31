@@ -32,12 +32,27 @@ export const StoreProvider = ({ children }) => {
         }
     };
 
+    const editContact = async (id, updatedData) => {
+    try {
+        const response = await fetch(`https://playground.4geeks.com/contact/agendas/Jason%20Derulo/contacts/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData)
+        });
+        if (!response.ok) throw new Error("Failed to update");
+        await getContacts(); 
+    } catch (error) {
+        console.error("Error editing contact:", error);
+    }
+};
+
+
     useEffect(() => {
         loadContacts();
     }, []);
 
     return (
-        <StoreContext.Provider value={{ contacts, addContact, deleteContact, updateContact }}>
+        <StoreContext.Provider value={{ contacts, addContact, deleteContact, updateContact, editContact }}>
             {children}
         </StoreContext.Provider>
     );
