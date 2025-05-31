@@ -1,6 +1,6 @@
-import { useStore } from "../store";
-import CardContact from "../components/CardContact";
+import { useStore } from "../store.jsx";
 import { useNavigate } from "react-router-dom";
+import CardContact from "../components/CardContact";
 
 const Contacts = () => {
     const { contacts } = useStore();
@@ -8,14 +8,19 @@ const Contacts = () => {
 
     return (
         <div className="container">
-            <button className="add-btn" onClick={() => navigate("/add-contact")}>Add new contact</button>
-            <div className="contact-list">
+            <button
+                className="btn btn-success my-3"
+                onClick={() => navigate("/add-contact")}
+            >
+                Add new contact
+            </button>
+            <div>
                 {contacts.length > 0 ? (
                     contacts.map(contact => (
                         <CardContact key={contact.id} contact={contact} />
                     ))
                 ) : (
-                    <p>No contacts available. Click "Add new contact" to add one.</p>
+                    <p>No contacts available.</p>
                 )}
             </div>
         </div>

@@ -1,13 +1,8 @@
-import { useNavigate } from "react-router-dom";
-
 const Home = () => {
-    const navigate = useNavigate();
-
     return (
-        <div className="container">
-            <h2>Welcome to Contact Manager</h2>
-            <button onClick={() => navigate("/contacts")}>View Contacts</button>
-            <button onClick={() => navigate("/add-contact")}>Add New Contact</button>
+        <div className="container text-center my-5">
+            <h1>Welcome to the Contact App</h1>
+            <p>Use the navigation bar or go to /contacts to manage your agenda.</p>
         </div>
     );
 };
