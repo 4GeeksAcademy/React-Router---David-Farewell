@@ -3,7 +3,7 @@ import { useStore } from "../store";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddContact = () => {
-    const { contacts, addContact, editContact } = useStore();
+    const { contacts, addContact, updateContact } = useStore();
     const navigate = useNavigate();
     const { id } = useParams();
     const isEditing = !!id;
@@ -33,12 +33,12 @@ const AddContact = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (isEditing) {
-            editContact(parseInt(id), formData);
+            await updateContact(parseInt(id), formData); 
         } else {
-            addContact(formData);
+            await addContact(formData);
         }
         navigate("/contacts");
     };

@@ -24,10 +24,10 @@ button {
     transform: scale(1);
 }
 
-/* ✨ Hover mejorado */
+
 .card:hover {
     transform: scale(1.015);
-    box-shadow: 0 12px 48px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.08);
 }
@@ -54,12 +54,12 @@ img {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #4ca3ff;
     color: #fff;
 }
 
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #e63030ee;
     color: #fff;
 }
 
@@ -67,7 +67,7 @@ img {
     opacity: 0.85;
 }
 
-/* 🎯 Botones en esquina superior derecha */
+
 .action-buttons {
     position: absolute;
     top: 1rem;
@@ -76,7 +76,7 @@ img {
     gap: 0.4rem;
 }
 
-/* Estilo para el formulario */
+
 form {
     max-width: 500px;
     margin: 0 auto;
@@ -109,7 +109,7 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #6cb1fc;
     box-shadow: 0 0 4px #007bff55;
 }
 
